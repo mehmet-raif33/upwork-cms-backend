@@ -5,6 +5,7 @@ const { pool } = require('./config/db');
 const app = express();
 
 // Pool'u app.locals'a ekle
+//dssd
 app.locals.pool = pool;
 
 app.use(cors({

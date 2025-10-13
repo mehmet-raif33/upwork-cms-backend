@@ -106,6 +106,7 @@ exports.register = async (req, res) => {
     await saveRefreshToken(result.insertId, refreshToken);
 
     res.status(201).json({
+      success: true,
       message: 'Kullanıcı başarıyla oluşturuldu',
       user: {
         id: result.insertId,
@@ -200,6 +201,7 @@ exports.login = async (req, res) => {
     await saveRefreshToken(user.id, refreshToken);
 
     res.json({
+      success: true,
       message: 'Giriş başarılı',
       user: {
         id: user.id,
@@ -368,10 +370,13 @@ exports.getProfile = async (req, res) => {
 exports.changePassword = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { currentPassword, newPassword } = req.body;
+    // Frontend hem oldPassword hem currentPassword gönderebilir
+    const { currentPassword, newPassword, oldPassword } = req.body;
+    const passwordToCheck = currentPassword || oldPassword;
 
-    if (!currentPassword || !newPassword) {
+    if (!passwordToCheck || !newPassword) {
       return res.status(400).json({
+        success: false,
         message: 'Mevcut şifre ve yeni şifre gerekli',
         error: 'MISSING_FIELDS'
       });
@@ -379,6 +384,7 @@ exports.changePassword = async (req, res) => {
 
     if (newPassword.length < 6) {
       return res.status(400).json({
+        success: false,
         message: 'Yeni şifre en az 6 karakter olmalı',
         error: 'WEAK_PASSWORD'
       });
@@ -392,14 +398,16 @@ exports.changePassword = async (req, res) => {
 
     if (users.length === 0) {
       return res.status(404).json({
+        success: false,
         message: 'Kullanıcı bulunamadı',
         error: 'USER_NOT_FOUND'
       });
     }
 
-    const isValidPassword = await bcrypt.compare(currentPassword, users[0].password_hash);
+    const isValidPassword = await bcrypt.compare(passwordToCheck, users[0].password_hash);
     if (!isValidPassword) {
       return res.status(401).json({
+        success: false,
         message: 'Mevcut şifre yanlış',
         error: 'INVALID_PASSWORD'
       });
@@ -415,6 +423,7 @@ exports.changePassword = async (req, res) => {
     );
 
     res.json({
+      success: true,
       message: 'Şifre başarıyla değiştirildi'
     });
     // Activity log
