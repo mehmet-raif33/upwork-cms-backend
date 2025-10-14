@@ -13,7 +13,7 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:5173',
     'http://localhost:3001',
-    'https://upwork-cms-frontend-production.up.railway.app', // Yeni frontend domain
+    'https://ulasapp.site/', // Yeni frontend domain
     // Yeni domain'i buraya ekleyin
     process.env.FRONTEND_URL, // Environment variable'dan al
     // Wildcard için (güvenlik açısından dikkatli kullanın)
