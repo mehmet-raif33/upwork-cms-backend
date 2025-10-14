@@ -13,8 +13,8 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:5173',
     'http://localhost:3001',
-    'https://ulasapp.site/', // Yeni frontend domain
-    // Yeni domain'i buraya ekleyin
+    'https://ulasapp.site', // Yeni frontend domain (trailing slash olmadan)
+    'https://www.ulasapp.site', // www ile de ekleyelim
     process.env.FRONTEND_URL, // Environment variable'dan al
     // Wildcard için (güvenlik açısından dikkatli kullanın)
     // 'https://*.railway.app',
