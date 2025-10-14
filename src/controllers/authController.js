@@ -39,7 +39,7 @@ const validateRefreshToken = async (refreshToken) => {
 // Kullanıcı kaydı
 exports.register = async (req, res) => {
   try {
-    const { full_name, username, email, password, role = 'employee' } = req.body;
+    const { full_name, username, email, password, role = 'personnel' } = req.body;
 
     // Gerekli alanları kontrol et
     if (!full_name || !username || !email || !password) {

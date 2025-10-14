@@ -44,21 +44,21 @@ const testRoutes = require('./routes/test');
 // Yeni ayrılmış route'lar
 const profitRoutes = require('./routes/profit');
 const revenueRoutes = require('./routes/revenue');
-
+//sdfds
 app.use('/', indexRoutes);
-app.use('/user', userRoutes);
-app.use('/health', healthRoutes);
-app.use('/auth', authRoutes);
-app.use('/transaction-categories', transactionCategoriesRoutes);
-app.use('/vehicles', vehiclesRoutes);
-app.use('/personnel', personnelRoutes);
-app.use('/transactions', transactionsRoutes);  
-app.use('/activities', activitiesRoutes);
-app.use('/test', testRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/health', healthRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/transaction-categories', transactionCategoriesRoutes);
+app.use('/api/vehicles', vehiclesRoutes);
+app.use('/api/personnel', personnelRoutes);
+app.use('/api/transactions', transactionsRoutes);  
+app.use('/api/activities', activitiesRoutes);
+app.use('/api/test', testRoutes);
 
 // Yeni ayrılmış endpoint'ler
-app.use('/profit', profitRoutes);   // Kar hesaplama endpoint'leri
-app.use('/revenue', revenueRoutes); // Ciro hesaplama endpoint'leri
+app.use('/api/profit', profitRoutes);   // Kar hesaplama endpoint'leri
+app.use('/api/revenue', revenueRoutes); // Ciro hesaplama endpoint'leri
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {

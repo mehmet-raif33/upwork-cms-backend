@@ -22,16 +22,16 @@ router.post('/create-test-user', async (req, res) => {
     
     const [result] = await pool.promise().query(
       'INSERT INTO personnel (full_name, username, email, password_hash, role, is_active) VALUES (?, ?, ?, ?, ?, ?)',
-      ['Test Admin', 'admin', 'admin@ulas.com', passwordHash, 'admin', 1]
+      ['Test Manager', 'manager', 'manager@ulas.com', passwordHash, 'manager', 1]
     );
     
     res.status(201).json({
       message: 'Test kullanıcısı oluşturuldu',
       user: {
         id: result.insertId,
-        username: 'admin',
-        email: 'admin@ulas.com',
-        role: 'admin'
+        username: 'manager',
+        email: 'manager@ulas.com',
+        role: 'manager'
       }
     });
   } catch (error) {

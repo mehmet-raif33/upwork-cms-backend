@@ -46,22 +46,22 @@ async function addTestData() {
     
     await pool.promise().query(`
       INSERT INTO personnel (full_name, username, email, password_hash, role, is_active) 
-      VALUES ('Admin User', 'admin', 'admin@servis.com', ?, 'admin', true)
+      VALUES ('Manager User', 'manager', 'manager@servis.com', ?, 'manager', true)
       ON DUPLICATE KEY UPDATE username = username
     `, [passwordHash]);
     
-    // Test çalışan kullanıcısı
-    const employeeHash = await bcrypt.hash('calisan123', 12);
+    // Test personel kullanıcısı
+    const personnelHash = await bcrypt.hash('personel123', 12);
     
     await pool.promise().query(`
       INSERT INTO personnel (full_name, username, email, password_hash, role, is_active) 
-      VALUES ('Çalışan User', 'calisan1', 'calisan1@servis.com', ?, 'employee', true)
+      VALUES ('Personnel User', 'personel1', 'personel1@servis.com', ?, 'personnel', true)
       ON DUPLICATE KEY UPDATE username = username
-    `, [employeeHash]);
+    `, [personnelHash]);
     
     console.log('✅ Test verisi eklendi!');
-    console.log('Admin kullanıcısı: admin / admin123');
-    console.log('Çalışan kullanıcısı: calisan1 / calisan123');
+    console.log('Manager kullanıcısı: manager / admin123');
+    console.log('Personnel kullanıcısı: personel1 / personel123');
     
   } catch (error) {
     console.error('Test verisi ekleme hatası:', error.message);

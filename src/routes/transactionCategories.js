@@ -39,11 +39,11 @@ router.get('/', authenticateToken, async (req, res) => {
 // Yeni işlem türü ekle
 router.post('/', authenticateToken, async (req, res) => {
   try {
-    // Admin kontrolü
-    if (req.user.role !== 'admin') {
+    // Manager kontrolü
+    if (req.user.role !== 'manager') {
       return res.status(403).json({
         success: false,
-        message: 'Bu işlem için admin yetkisi gereklidir'
+        message: 'Bu işlem için manager yetkisi gereklidir'
       });
     }
 
@@ -99,11 +99,11 @@ router.post('/', authenticateToken, async (req, res) => {
 // İşlem türü güncelle
 router.put('/:id', authenticateToken, async (req, res) => {
   try {
-    // Admin kontrolü
-    if (req.user.role !== 'admin') {
+    // Manager kontrolü
+    if (req.user.role !== 'manager') {
       return res.status(403).json({
         success: false,
-        message: 'Bu işlem için admin yetkisi gereklidir'
+        message: 'Bu işlem için manager yetkisi gereklidir'
       });
     }
 
@@ -173,11 +173,11 @@ router.put('/:id', authenticateToken, async (req, res) => {
 // İşlem türü sil
 router.delete('/:id', authenticateToken, async (req, res) => {
   try {
-    // Admin kontrolü
-    if (req.user.role !== 'admin') {
+    // Manager kontrolü
+    if (req.user.role !== 'manager') {
       return res.status(403).json({
         success: false,
-        message: 'Bu işlem için admin yetkisi gereklidir'
+        message: 'Bu işlem için manager yetkisi gereklidir'
       });
     }
 

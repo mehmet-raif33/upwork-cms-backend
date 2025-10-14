@@ -105,11 +105,11 @@ router.get('/:id', authenticateToken, async (req, res) => {
 // Yeni personel ekle
 router.post('/', authenticateToken, async (req, res) => {
   try {
-    // Admin kontrolü
-    if (req.user.role !== 'admin') {
+    // Manager kontrolü
+    if (req.user.role !== 'manager') {
       return res.status(403).json({
         success: false,
-        message: 'Bu işlem için admin yetkisi gereklidir'
+        message: 'Bu işlem için manager yetkisi gereklidir'
       });
     }
 
@@ -201,11 +201,11 @@ router.post('/', authenticateToken, async (req, res) => {
 // Personel güncelle
 router.put('/:id', authenticateToken, async (req, res) => {
   try {
-    // Admin kontrolü
-    if (req.user.role !== 'admin') {
+    // Manager kontrolü
+    if (req.user.role !== 'manager') {
       return res.status(403).json({
         success: false,
-        message: 'Bu işlem için admin yetkisi gereklidir'
+        message: 'Bu işlem için manager yetkisi gereklidir'
       });
     }
 
@@ -229,10 +229,10 @@ router.put('/:id', authenticateToken, async (req, res) => {
     const targetPerson = targetPersonnel[0];
 
     // Yönetici düzenleme kontrolü - Yöneticiler sadece normal personeli düzenleyebilir
-    if (targetPerson.role === 'admin') {
+    if (targetPerson.role === 'manager') {
       return res.status(403).json({
         success: false,
-        message: 'Yönetici hesapları düzenlenemez'
+        message: 'Manager hesapları düzenlenemez'
       });
     }
 
@@ -355,11 +355,11 @@ router.put('/:id', authenticateToken, async (req, res) => {
 // Personel durumu güncelle (aktif/pasif)
 router.patch('/:id/status', authenticateToken, async (req, res) => {
   try {
-    // Admin kontrolü
-    if (req.user.role !== 'admin') {
+    // Manager kontrolü
+    if (req.user.role !== 'manager') {
       return res.status(403).json({
         success: false,
-        message: 'Bu işlem için admin yetkisi gereklidir'
+        message: 'Bu işlem için manager yetkisi gereklidir'
       });
     }
 

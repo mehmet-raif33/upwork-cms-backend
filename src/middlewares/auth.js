@@ -25,7 +25,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// Admin yetkisi kontrolü
+// Manager yetkisi kontrolü
 const requireAdmin = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({ 
@@ -34,17 +34,17 @@ const requireAdmin = (req, res, next) => {
     });
   }
 
-  if (req.user.role !== 'admin') {
+  if (req.user.role !== 'manager') {
     return res.status(403).json({ 
-      message: 'Bu işlem için admin yetkisi gerekli',
-      error: 'ADMIN_REQUIRED'
+      message: 'Bu işlem için manager yetkisi gerekli',
+      error: 'MANAGER_REQUIRED'
     });
   }
 
   next();
 };
 
-// Çalışan yetkisi kontrolü (admin veya employee)
+// Personel yetkisi kontrolü (manager veya personnel)
 const requireEmployee = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({ 
@@ -53,10 +53,10 @@ const requireEmployee = (req, res, next) => {
     });
   }
 
-  if (req.user.role !== 'admin' && req.user.role !== 'employee') {
+  if (req.user.role !== 'manager' && req.user.role !== 'personnel') {
     return res.status(403).json({ 
-      message: 'Bu işlem için çalışan yetkisi gerekli',
-      error: 'EMPLOYEE_REQUIRED'
+      message: 'Bu işlem için personel yetkisi gerekli',
+      error: 'PERSONNEL_REQUIRED'
     });
   }
 
